@@ -2,7 +2,7 @@
 Contributors: nofearinc, devrix, hofmannsven, metodiew
 Tags: plugin, localhost, development, production, notice, toolbar, staging
 Requires at least: 3.1
-Tested up to: 4.5
+Tested up to: 4.6
 Stable tag: 1.0
 License: GPLv2 or later
 
