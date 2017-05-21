@@ -69,7 +69,8 @@ class DX_Localhost {
 			$style = '';
 			$notice_color_val       = isset( $dx_localhost_settings['notice-color'] ) ? $dx_localhost_settings['notice-color'] : "";
 			$notice_text_color_val  = isset( $dx_localhost_settings['notice-text-color'] ) ? $dx_localhost_settings['notice-text-color'] : "";
-			$is_logged_in = is_user_logged_in();
+			$selected_skin  		= isset( $dx_localhost_settings['skin'] ) ? $dx_localhost_settings['skin'] : "";
+			$is_logged_in 			= is_user_logged_in();
 			
 			if ( ! empty( $notice_color_val ) ) {
 				$style .= 'background-color: ' . $notice_color_val . ';';
@@ -78,18 +79,32 @@ class DX_Localhost {
 			if ( ! empty( $notice_text_color_val ) ) {
 				$style .= 'color: ' . $notice_text_color_val . ';';
 			}
+
+			if ( empty( $selected_skin ) ) {
+				$selected_skin = 'basic';
+			}
+
+			// Add the selected class to the body for general stylings.
+			add_filter( 'admin_body_class', array( $this, 'dx_localhost_body_class' ) );
 			
 			if ( ! empty( $is_logged_in ) && $is_logged_in == true ) {
 				$is_admin_bar_showing = is_admin_bar_showing();
+
 				if ( ! empty( $is_admin_bar_showing ) && $is_admin_bar_showing == true ) {
 					$style .= 'top: 32px;';
 				}
 			}
 			
-			$notice_msg = __( 'You are working on ' . self::get_env_name() , 'dx_loc' );
+			$notice_msg = __( '<span class="msg">You are working on</span> <span class="env">' . self::get_env_name() . '</span>', 'dx_loc' );
 			
-			echo '<div id="dx-localhost-notice" style = "'. $style . '">'. $notice_msg .'</div>';
+			echo '<div class="localhost-notice ' . $selected_skin . '" id="dx-localhost-notice" style = "'. $style . '">'. $notice_msg .'</div>';
 		}
+	}
+
+	function dx_localhost_body_class( $classes ) {
+		$dx_localhost_settings 	= get_option( 'dx-localhost-settings' );
+		$selected_skin  		= isset( $dx_localhost_settings['skin'] ) ? $dx_localhost_settings['skin'] : "";
+	    return "$classes $selected_skin";
 	}
 
 	/**
@@ -129,7 +144,7 @@ class DX_Localhost {
 
 	function dx_localhost_options_cb() {
 		$dx_localhost = get_option( 'dx-localhost-settings' );		
-		$dx_localhost_settings = !empty( $dx_localhost ) && is_array( $dx_localhost ) ? $dx_localhost : "";
+		$dx_localhost_settings = ! empty( $dx_localhost ) && is_array( $dx_localhost ) ? $dx_localhost : "";
 		
 		$toolbar_checkbox_val   = isset( $dx_localhost_settings['toolbar-checkbox'] ) ? $dx_localhost_settings['toolbar-checkbox'] : "";
 		$notice_checkbox_val    = isset( $dx_localhost_settings['notice-checkbox'] ) ? $dx_localhost_settings['notice-checkbox'] : "";
@@ -139,6 +154,9 @@ class DX_Localhost {
 		$notice_text_color_val  = isset( $dx_localhost_settings['notice-text-color'] ) ? $dx_localhost_settings['notice-text-color'] : "";
 		$dx_env_name            = isset( $dx_localhost_settings['env-name'] ) ? $dx_localhost_settings['env-name'] : "";
 		$dx_ip_addr             = isset( $dx_localhost_settings['ip-addr'] ) ? $dx_localhost_settings['ip-addr'] : "";
+		$dx_skin             	= isset( $dx_localhost_settings['skin'] ) ? $dx_localhost_settings['skin'] : "";
+
+		var_dump( $dx_skin );
 		?>
 		<div class="wrap">
 			<h2><?php _e( 'DX localhost Options', 'dx_loc' ); ?></h2>
@@ -186,6 +204,19 @@ class DX_Localhost {
 							<th scope="row"><?php _e( 'Dev Site IP Address:', 'dx_loc' ); ?></th>
 							<td>
 								<div><input class="dx-localhost-settings-ip-addr" type="text" id="dx-ip-addr-id" name="dx-localhost-settings[ip-addr]" value="<?php echo $_SERVER['SERVER_ADDR'] ?>" /></div>
+							</td>
+						</tr>
+
+						<tr>
+							<th scope="row"><?php _e( 'DX Localhost skin selector:', 'dx_loc' ); ?></th>
+							<td>
+								<div>
+									<select class="dx-localhost-settings-skin-selector" name="dx-localhost-settings[skin]" id="dx-skin" value="<?php echo $dx_skin ?>">
+										<option value="basic" <?php selected( $dx_localhost_settings['skin'], "basic"); ?>>Basic</option>
+										<option value="non-intrusive-bottom" <?php selected( $dx_localhost_settings['skin'], "non-intrusive-bottom"); ?>>Non-intrusive bottom</option>
+										<option value="non-intrusive-top" <?php selected( $dx_localhost_settings['skin'], "non-intrusive-top"); ?>>Non-intrusive top</option>
+									</select>
+								</div>
 							</td>
 						</tr>
 					</table>				
