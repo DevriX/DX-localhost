@@ -155,8 +155,6 @@ class DX_Localhost {
 		$dx_env_name            = isset( $dx_localhost_settings['env-name'] ) ? $dx_localhost_settings['env-name'] : "";
 		$dx_ip_addr             = isset( $dx_localhost_settings['ip-addr'] ) ? $dx_localhost_settings['ip-addr'] : "";
 		$dx_skin             	= isset( $dx_localhost_settings['skin'] ) ? $dx_localhost_settings['skin'] : "";
-
-		var_dump( $dx_skin );
 		?>
 		<div class="wrap">
 			<h2><?php _e( 'DX localhost Options', 'dx_loc' ); ?></h2>
