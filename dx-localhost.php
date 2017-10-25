@@ -63,8 +63,9 @@ class DX_Localhost {
 		
 		$is_display_notice_line = ! empty( $dx_localhost_settings['notice-checkbox'] ) ? $dx_localhost_settings['notice-checkbox'] : "";
 		
+		wp_enqueue_style( 'dx-localhost', DX_LOCALHOST_ASSETS_URL . '/css/dx-localhost.css' );
 		if ( empty( $is_display_notice_line ) ) {
-			wp_enqueue_style( 'dx-localhost', DX_LOCALHOST_ASSETS_URL . '/css/dx-localhost.css' );
+			
 			
 			$style = '';
 			$notice_color_val       = isset( $dx_localhost_settings['notice-color'] ) ? $dx_localhost_settings['notice-color'] : "";
