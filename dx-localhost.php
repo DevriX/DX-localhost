@@ -125,7 +125,28 @@ class DX_Localhost {
 	}
 
 	function dx_localhost_admin_init() {
+
 		register_setting( 'dx-localhost-settings', 'dx-localhost-settings', array( $this, 'dx_validate_settings' ) );
+		
+		//set the default value of settings
+		$dx_localhost_settings = get_option( 'dx-localhost-settings' );
+		if(!$dx_localhost_settings)
+		{
+			$default_settings = array(
+				'toolbar-color' => "#25292d",
+				'toolbar-text-color' => "#ffffff",
+				'notice-color' => "#f0e9aa",
+				'notice-text-color' => "#23282d",
+				'env-name' => "",
+				'ip-addr' => "",
+				'toolbar-checkbox' => 0,
+				'toolbar-font-weight' => 0,
+				'notice-checkbox' => 0,
+			);
+			
+			add_option("dx-localhost-settings",$default_settings);
+		}
+
 	}
 
 	function dx_localhost_options_cb() {
@@ -133,6 +154,7 @@ class DX_Localhost {
 		$dx_localhost_settings = !empty( $dx_localhost ) && is_array( $dx_localhost ) ? $dx_localhost : "";
 		
 		$toolbar_checkbox_val   = isset( $dx_localhost_settings['toolbar-checkbox'] ) ? $dx_localhost_settings['toolbar-checkbox'] : "";
+		$toolbar_font_weight_checkbox_val   = isset( $dx_localhost_settings['toolbar-font-weight'] ) ? $dx_localhost_settings['toolbar-font-weight'] : "";
 		$notice_checkbox_val    = isset( $dx_localhost_settings['notice-checkbox'] ) ? $dx_localhost_settings['notice-checkbox'] : "";
 		$toolbar_color_val      = isset( $dx_localhost_settings['toolbar-color'] ) ? $dx_localhost_settings['toolbar-color'] : "";
 		$notice_color_val       = isset( $dx_localhost_settings['notice-color'] ) ? $dx_localhost_settings['notice-color'] : "";
@@ -170,6 +192,13 @@ class DX_Localhost {
 							<td><input type="text" id="toolbar-text-color" name="dx-localhost-settings[toolbar-text-color]" value="<?php echo $toolbar_text_color_val;?>" class="toolbar-text-color-field"  /></td>
 						</tr>
 						<tr>
+							<th scope="row"><?php _e( 'Toolbar Font Weight', 'dx_loc' ); ?></th>
+							<td>
+								<div><input type="checkbox" id="toolbar-font-weight" name="dx-localhost-settings[toolbar-font-weight]" value="1" <?php checked('1', $toolbar_font_weight_checkbox_val); ?> />
+								<label for="toolbar-font-weight"><?php _e( 'Bolded Toolbar Button Text', 'dx_loc' ); ?></label></div>
+							</td>
+						</tr>
+						<tr>
 							<th scope="row"><?php _e( 'Notice Line Color', 'dx_loc' ); ?></th>
 							<td><input type="text" id="notice-color" name="dx-localhost-settings[notice-color]" value="<?php echo $notice_color_val;?>" class="notice-color-field"  /></td>
 						</tr>
@@ -189,6 +218,12 @@ class DX_Localhost {
 								<div><input class="dx-localhost-settings-ip-addr" type="text" id="dx-ip-addr-id" name="dx-localhost-settings[ip-addr]" value="<?php echo $_SERVER['SERVER_ADDR'] ?>" /></div>
 							</td>
 						</tr>
+						<tr>
+							<th scope="row"></th>
+							<td>
+								<div><button class="button" id="dx-localhost-settings-reset" type="button" onclick="resetToDefault()" >Reset to Default</button></div>
+							</td>
+						</tr>
 					</table>				
 				<div><?php submit_button( __( 'Save Changes', 'dx_loc', 'primary', 'dx-localhost' ) );?></div>
 			</form>
@@ -202,7 +237,8 @@ class DX_Localhost {
 		
 		$toolbar_checkbox_val     = isset( $dx_localhost_settings['toolbar-checkbox'] ) ? $dx_localhost_settings['toolbar-checkbox'] : "";
 		$notice_line_checkbox_val = isset( $dx_localhost_settings['notice-checkbox'] ) ? $dx_localhost_settings['notice-checkbox'] : "";
-			
+		
+		
 		//if toolbar is not disabled display the style
 		if( empty( $toolbar_checkbox_val ) || $toolbar_checkbox_val == 0 ) {
 			self::dx_localhost_dispay_toolbar( $wp_admin_bar );
@@ -219,6 +255,9 @@ class DX_Localhost {
 		
 		$toolbar_color_val      = isset( $dx_localhost_settings['toolbar-color'] ) ? $dx_localhost_settings['toolbar-color'] : "";		
 		$toolbar_text_color_val = isset( $dx_localhost_settings['toolbar-text-color'] ) ? $dx_localhost_settings['toolbar-text-color'] : "";
+
+		$toolbar_font_weight_checkbox_val = isset( $dx_localhost_settings['toolbar-font-weight'] ) ? $dx_localhost_settings['toolbar-font-weight'] : "";
+
 		$style = "";
 		?>
 		<style type="text/css">
@@ -232,8 +271,13 @@ class DX_Localhost {
 				<?php $style .= ' color: '. $toolbar_text_color_val .';' ?>
 			}
 		<?php endif; ?>
+	
 		</style>
 		<?php
+		if( !empty( $toolbar_font_weight_checkbox_val ) || $toolbar_font_weight_checkbox_val == "1" ) {
+			$style .= ' font-weight: bold;';
+		}
+
 		return $style;
 	}
 	
@@ -308,6 +352,10 @@ class DX_Localhost {
 	function dx_validate_settings( $input ) {
 		if ( ! isset( $input['toolbar-checkbox'] ) ) {
 			$input['toolbar-checkbox'] = 0;
+		}
+
+		if ( ! isset( $input['toolbar-font-weight'] ) ) {
+			$input['toolbar-font-weight'] = 0;
 		}
 		
 		if ( ! isset( $input['notice-checkbox'] ) ) {
