@@ -5,17 +5,17 @@ jQuery( document ).ready( function( $ ) {
 	$('.notice-text-color-field').wpColorPicker();
 
 	$("#dx-localhost-settings-reset").click(function(){
-
 		var con = confirm("are you sure to reset it to default");
-
 		if(con)
 		{
 			$("#dx-env-name-id").val("");
 			$("#notice-checkbox").prop("checked",false);
-			$('.toolbar-color-field').wpColorPicker('color','#fff');
-			$('.notice-color-field').wpColorPicker('color','#fff');
-			$('.toolbar-text-color-field').wpColorPicker('color','#fff');
-			$('.notice-text-color-field').wpColorPicker('color','#fff');
+			$("#toolbar-checkbox").prop("checked",false);
+			$("#toolbar-font-weight").prop("checked",false);
+			$('.toolbar-color-field').wpColorPicker('color','#0a0a0a');
+			$('.notice-color-field').wpColorPicker('color','#efef8d');
+			$('.toolbar-text-color-field').wpColorPicker('color','#ffffff');
+			$('.notice-text-color-field').wpColorPicker('color','#606060');
 		}
 	});
 });

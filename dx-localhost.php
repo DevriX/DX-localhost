@@ -133,10 +133,10 @@ class DX_Localhost {
 		if(!$dx_localhost_settings)
 		{
 			$default_settings = array(
-				'toolbar-color' => "#25292d",
+				'toolbar-color' => "#0a0a0a",
 				'toolbar-text-color' => "#ffffff",
-				'notice-color' => "#f0e9aa",
-				'notice-text-color' => "#23282d",
+				'notice-color' => "#efef8d",
+				'notice-text-color' => "#606060",
 				'env-name' => "",
 				'ip-addr' => "",
 				'toolbar-checkbox' => 0,
