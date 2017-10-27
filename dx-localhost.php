@@ -142,6 +142,8 @@ class DX_Localhost {
 				'toolbar-checkbox' => 0,
 				'toolbar-font-weight' => 0,
 				'notice-checkbox' => 0,
+				'adminbar-color' => "#23282D",
+				'adminbar-text-color' => "#eeeeee",
 			);
 			
 			add_option("dx-localhost-settings",$default_settings);
@@ -157,6 +159,8 @@ class DX_Localhost {
 		$toolbar_font_weight_checkbox_val   = isset( $dx_localhost_settings['toolbar-font-weight'] ) ? $dx_localhost_settings['toolbar-font-weight'] : "";
 		$notice_checkbox_val    = isset( $dx_localhost_settings['notice-checkbox'] ) ? $dx_localhost_settings['notice-checkbox'] : "";
 		$toolbar_color_val      = isset( $dx_localhost_settings['toolbar-color'] ) ? $dx_localhost_settings['toolbar-color'] : "";
+		$adminbar_color_val      = isset( $dx_localhost_settings['adminbar-color'] ) ? $dx_localhost_settings['adminbar-color'] : "";
+		$adminbar_text_color_val      = isset( $dx_localhost_settings['adminbar-text-color'] ) ? $dx_localhost_settings['adminbar-text-color'] : "";
 		$notice_color_val       = isset( $dx_localhost_settings['notice-color'] ) ? $dx_localhost_settings['notice-color'] : "";
 		$toolbar_text_color_val = isset( $dx_localhost_settings['toolbar-text-color'] ) ? $dx_localhost_settings['toolbar-text-color'] : "";
 		$notice_text_color_val  = isset( $dx_localhost_settings['notice-text-color'] ) ? $dx_localhost_settings['notice-text-color'] : "";
@@ -182,6 +186,14 @@ class DX_Localhost {
 								<div><input type="checkbox" id="notice-checkbox" name="dx-localhost-settings[notice-checkbox]" value="1"<?php checked('1', $notice_checkbox_val);?> />
 								<label for="notice-checkbox"><?php _e( 'Disable Notice Line', 'dx_loc' ); ?></label></div>
 							</td>
+						</tr>
+						<tr>
+							<th scope="row"><?php _e( 'Adminbar Color', 'dx_loc' ); ?></th>
+							<td><input type="text" id="adminbar-color" name="dx-localhost-settings[adminbar-color]" value="<?php echo $adminbar_color_val; ?>" class="adminbar-color-field"  /></td>
+						</tr>
+						<tr>
+							<th scope="row"><?php _e( 'Adminbar Text Color', 'dx_loc' ); ?></th>
+							<td><input type="text" id="adminbar-text-color" name="dx-localhost-settings[adminbar-text-color]" value="<?php echo $adminbar_text_color_val; ?>" class="adminbar-text-color-field"  /></td>
 						</tr>
 						<tr>
 							<th scope="row"><?php _e( 'Toolbar Button Color', 'dx_loc' ); ?></th>
@@ -256,6 +268,10 @@ class DX_Localhost {
 		$toolbar_color_val      = isset( $dx_localhost_settings['toolbar-color'] ) ? $dx_localhost_settings['toolbar-color'] : "";		
 		$toolbar_text_color_val = isset( $dx_localhost_settings['toolbar-text-color'] ) ? $dx_localhost_settings['toolbar-text-color'] : "";
 
+		$adminbar_color_val      = isset( $dx_localhost_settings['adminbar-color'] ) ? $dx_localhost_settings['adminbar-color'] : "";
+
+		$adminbar_text_color_val      = isset( $dx_localhost_settings['adminbar-text-color'] ) ? $dx_localhost_settings['adminbar-text-color'] : "";
+
 		$toolbar_font_weight_checkbox_val = isset( $dx_localhost_settings['toolbar-font-weight'] ) ? $dx_localhost_settings['toolbar-font-weight'] : "";
 
 		$style = "";
@@ -270,6 +286,25 @@ class DX_Localhost {
 			.dx-localhost-btn {
 				<?php $style .= ' color: '. $toolbar_text_color_val .';' ?>
 			}
+		<?php endif; ?>
+
+		<?php if( !empty( $adminbar_color_val ) ) : ?>
+			#wpadminbar {
+				<?= 'background-color: '. $adminbar_color_val .';'; ?>
+			}
+		<?php endif; ?>
+
+		<?php if( !empty( $adminbar_text_color_val ) ) : ?>
+			#wpadminbar a,span {
+				<?= 'color: '. $adminbar_text_color_val .' !important;'; ?>
+			}
+			#wpadminbar .ab-icon::before {
+				<?= 'color: '. $adminbar_text_color_val .';'; ?>
+			}
+			#wpadminbar .ab-item::before {
+				<?= 'color: '. $adminbar_text_color_val .';'; ?>
+			}
+			
 		<?php endif; ?>
 	
 		</style>
