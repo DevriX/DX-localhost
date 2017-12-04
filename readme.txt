@@ -35,6 +35,12 @@ Take a look our video review of DX localhost
 *You can change it by entering your desired environment name in the Dev Environment Name input field, Save the changes and you're done! 
 
 == Changelog ==
+= 1.4 =
+* Added new option for change the color of adminbar
+* Added new option for changing the color of the adminbar text
+* added new checkbox for making the toolbar font weight to bolded
+* fix the style of the toolbar
+* set a default value for the option of DX localhost
 
 = 1.3 =
 * Fix the issue with notice line when the user is not logged in
