@@ -3,7 +3,7 @@
  * Plugin Name: DX localhost
  * Plugin URI: https://wordpress.org/plugins/dx-localhost/
  * Description: Display a notice box when you're working on localhost or a staging server
- * Version: 1.3
+ * Version: 1.4
  * Author: DevriX
  * Author URI: http://devrix.com/
  * Text Domain: dx_loc
