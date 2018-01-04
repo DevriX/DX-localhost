@@ -31,7 +31,7 @@
  */
 
 if ( ! defined( 'DX_LOCALHOST_VERSION' ) ) {
-	define( 'DX_LOCALHOST_VERSION', '1.3' );
+	define( 'DX_LOCALHOST_VERSION', '1.4' );
 }
 
 if ( ! defined( 'DX_LOCALHOST_URL' ) ) {
