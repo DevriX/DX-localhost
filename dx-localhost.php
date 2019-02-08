@@ -45,6 +45,7 @@ if ( ! defined( 'DX_LOCALHOST_ASSETS_URL' ) ) {
 if ( ! class_exists( 'DX_Localhost' ) ) :
 class DX_Localhost {
 
+
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'dx_localhost_menu' ) );
 		add_action( 'admin_init', array( $this, 'dx_localhost_admin_init' ) );
@@ -94,8 +95,6 @@ class DX_Localhost {
 			}else if( $notice_position == 'bottom' ){
 				$style .= 'bottom: 0px';
 			}
-			
-			
 			
 			$notice_msg = __( 'You are working on ' . self::get_env_name() , 'dx_loc' );
 			
@@ -276,32 +275,48 @@ class DX_Localhost {
 		
 		//if toolbar is not disabled display the style
 		if( empty( $toolbar_checkbox_val ) || $toolbar_checkbox_val == 0 ) {
-			self::dx_localhost_dispay_toolbar( $wp_admin_bar );
+			self::dx_localhost_dispay_toolbar( $wp_admin_bar, $dx_localhost_settings );
 		}
 		//if notice line is not disabled display the style
 		if( empty( $notice_line_checkbox_val ) || $notice_line_checkbox_val == 0 ) {
-			self::dx_notice_line_style();
+			self::dx_notice_line_style( $dx_localhost_settings );
 		}
+
+		self::dx_admin_bar_style( $dx_localhost_settings );
 	}
 	
-	public static function dx_toolbar_button_style () {
-		$dx_localhost = get_option( 'dx-localhost-settings' );
-		$dx_localhost_settings = !empty( $dx_localhost ) && is_array( $dx_localhost ) ? $dx_localhost : "";
-		
+	public static function dx_toolbar_button_style ( $dx_localhost_settings ) {
+
 		$toolbar_color_val = isset( $dx_localhost_settings['toolbar-color'] ) ? !empty($dx_localhost_settings['toolbar-color'])? $dx_localhost_settings['toolbar-color']:"": "";		
 		$toolbar_text_color_val = isset( $dx_localhost_settings['toolbar-text-color'] ) ? !empty($dx_localhost_settings['toolbar-text-color'])? $dx_localhost_settings['toolbar-text-color']:"": "";
-
-		$adminbar_color_val = isset( $dx_localhost_settings['adminbar-color'] ) ? !empty($dx_localhost_settings['adminbar-color'])? $dx_localhost_settings['adminbar-color']:"": "";
-
-		$adminbar_text_color_val = isset( $dx_localhost_settings['adminbar-text-color'] ) ? !empty($dx_localhost_settings['adminbar-text-color'])? $dx_localhost_settings['adminbar-text-color']:"": "";
 
 		$toolbar_font_weight_checkbox_val = isset( $dx_localhost_settings['toolbar-font-weight'] ) ? !empty($dx_localhost_settings['toolbar-font-weight'])? $dx_localhost_settings['toolbar-font-weight']:"": "";
 
 		$style = "";
 
-		// load the dynamic style for adminbar backgourd-color and text color
+		if( !empty( $toolbar_font_weight_checkbox_val ) || $toolbar_font_weight_checkbox_val == "1" ) {
+			$style .= ' font-weight: bold;';
+		}
+
+		if( !empty( $toolbar_color_val) ){
+			$style .= ' background-color: '. $toolbar_color_val .';';
+		}
+
+		if( !empty( $toolbar_text_color_val) ){
+			$style .= ' color: '. $toolbar_text_color_val .';';
+		}
+
+		return $style;
+	}
+
+	public static function dx_admin_bar_style( $dx_localhost_settings ) {
+
+		$adminbar_color_val = isset( $dx_localhost_settings['adminbar-color'] ) ? !empty($dx_localhost_settings['adminbar-color'])? $dx_localhost_settings['adminbar-color']:"": "";
+
+		$adminbar_text_color_val = isset( $dx_localhost_settings['adminbar-text-color'] ) ? !empty($dx_localhost_settings['adminbar-text-color'])? $dx_localhost_settings['adminbar-text-color']:"": "";
 		?>
 		<style type="text/css">
+
 		<?php if( !empty( $adminbar_color_val ) ) : ?>
 			#wpadminbar {
 				<?= 'background-color: '. $adminbar_color_val .';'; ?>
@@ -318,20 +333,14 @@ class DX_Localhost {
 			#wpadminbar .ab-item::before {
 				<?= 'color: '. $adminbar_text_color_val .';'; ?>
 			}
-			
 		<?php endif; ?>
 	
 		</style>
 		<?php
-		if( !empty( $toolbar_font_weight_checkbox_val ) || $toolbar_font_weight_checkbox_val == "1" ) {
-			$style .= ' font-weight: bold;';
-		}
-
-		return $style;
 	}
 	
-	public static function dx_notice_line_style() {
-		$dx_localhost = get_option( 'dx-localhost-settings' );
+	public static function dx_notice_line_style( $dx_localhost_settings ) {
+
 		$dx_localhost_settings = !empty( $dx_localhost ) && is_array( $dx_localhost ) ? $dx_localhost : "";
 
 		$notice_color_val = isset( $dx_localhost_settings['notice-color'] ) ? !empty($dx_localhost_settings['notice-color'])? $dx_localhost_settings['notice-color']:"": "";
@@ -371,8 +380,8 @@ class DX_Localhost {
 		return $dx_env_name;
 	}
 
-	public static function dx_localhost_dispay_toolbar( $wp_admin_bar ) {
-		$dx_toolbar_btn_style = self::dx_toolbar_button_style();
+	public static function dx_localhost_dispay_toolbar( $wp_admin_bar, $dx_localhost_settings ) {
+		$dx_toolbar_btn_style = self::dx_toolbar_button_style( $dx_localhost_settings );
 		$dx_env_name = self::get_env_name();
 		
 		$args = array(
