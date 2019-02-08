@@ -2,7 +2,7 @@
 Contributors: nofearinc, devrix, hofmannsven, metodiew
 Tags: plugin, localhost, development, production, notice, toolbar, staging
 Requires at least: 3.1
-Tested up to: 4.9
+Tested up to: 5.0.3
 Stable tag: 1.0
 License: GPLv2 or later
 
@@ -36,11 +36,13 @@ Take a look our video review of DX localhost
 
 == Changelog ==
 = 1.4 =
+* Added new option for change the position of notice line to Top and Bottom
 * Added new option for change the color of adminbar
 * Added new option for changing the color of the adminbar text
-* added new checkbox for making the toolbar font weight to bolded
-* fix the style of the toolbar
-* set a default value for the option of DX localhost
+* Added new checkbox for making the toolbar font weight to bolded
+* Fix the style of the adminbar specically without toolbar
+* Fix the style of the toolbar
+* Set a default value for the option of DX localhost
 
 = 1.3 =
 * Fix the issue with notice line when the user is not logged in
