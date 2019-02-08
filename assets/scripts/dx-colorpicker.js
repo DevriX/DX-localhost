@@ -20,6 +20,7 @@ jQuery( document ).ready( function( $ ) {
 			$('#notice-text-color').wpColorPicker('color','#606060');
 			$('#adminbar-color').wpColorPicker('color','#23282D');
 			$('#adminbar-text-color').wpColorPicker('color','#eeeeee');
+			$('#dx-notice-position').val('top');
 		}
 	});
 });
