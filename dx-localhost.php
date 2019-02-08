@@ -87,9 +87,10 @@ class DX_Localhost {
 				if ( ! empty( $is_logged_in ) && $is_logged_in == true ) {
 					$is_admin_bar_showing = is_admin_bar_showing();
 					if ( ! empty( $is_admin_bar_showing ) && $is_admin_bar_showing == true ) {
-						$top .= 'top: 32px;';
+						$top = 'top: 32px;';
 					}
 				}
+				$style .= $top;
 			}else if( $notice_position == 'bottom' ){
 				$style .= 'bottom: 0px';
 			}
