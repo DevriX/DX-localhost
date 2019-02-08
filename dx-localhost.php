@@ -70,6 +70,8 @@ class DX_Localhost {
 			$style = '';
 			$notice_color_val = isset( $dx_localhost_settings['notice-color'] ) ? !empty($dx_localhost_settings['notice-color'])? $dx_localhost_settings['notice-color']:"": "";
 			$notice_text_color_val  = isset( $dx_localhost_settings['notice-text-color'] ) ? !empty($dx_localhost_settings['notice-text-color'])? $dx_localhost_settings['notice-text-color']:"": "";
+
+			$notice_position = isset( $dx_localhost_settings['notice-position'] ) ? !empty( $dx_localhost_settings['notice-position'] ) ? $dx_localhost_settings['notice-position'] : 'top' : 'top';
 			$is_logged_in = is_user_logged_in();
 			
 			if ( ! empty( $notice_color_val ) ) {
@@ -79,13 +81,20 @@ class DX_Localhost {
 			if ( ! empty( $notice_text_color_val ) ) {
 				$style .= 'color: ' . $notice_text_color_val . ';';
 			}
-			
-			if ( ! empty( $is_logged_in ) && $is_logged_in == true ) {
-				$is_admin_bar_showing = is_admin_bar_showing();
-				if ( ! empty( $is_admin_bar_showing ) && $is_admin_bar_showing == true ) {
-					$style .= 'top: 32px;';
+
+			if( $notice_position == 'top' ) {
+				$top = 'top: 0px';
+				if ( ! empty( $is_logged_in ) && $is_logged_in == true ) {
+					$is_admin_bar_showing = is_admin_bar_showing();
+					if ( ! empty( $is_admin_bar_showing ) && $is_admin_bar_showing == true ) {
+						$top .= 'top: 32px;';
+					}
 				}
+			}else if( $notice_position == 'bottom' ){
+				$style .= 'bottom: 0px';
 			}
+			
+			
 			
 			$notice_msg = __( 'You are working on ' . self::get_env_name() , 'dx_loc' );
 			
@@ -144,6 +153,7 @@ class DX_Localhost {
 				'notice-checkbox' => 0,
 				'adminbar-color' => "#23282D",
 				'adminbar-text-color' => "#eeeeee",
+				'notice-position'	=>	'top'
 			);
 			
 			add_option("dx-localhost-settings",$default_settings);
@@ -166,6 +176,7 @@ class DX_Localhost {
 		$notice_text_color_val  = isset( $dx_localhost_settings['notice-text-color'] ) ? !empty($dx_localhost_settings['notice-text-color'])? $dx_localhost_settings['notice-text-color']:"": "";
 		$dx_env_name            = isset( $dx_localhost_settings['env-name'] ) ? !empty($dx_localhost_settings['env-name'])? $dx_localhost_settings['env-name']:"": "";
 		$dx_ip_addr = isset( $dx_localhost_settings['ip-addr'] ) ? !empty($dx_localhost_settings['ip-addr'])? $dx_localhost_settings['ip-addr']:"": "";
+		$notice_position = isset( $dx_localhost_settings['notice-position'] ) ? !empty( $dx_localhost_settings['notice-position'] ) ? $dx_localhost_settings['notice-position'] : "" : "";
 		?>
 		<div class="wrap">
 			<h2><?php _e( 'DX localhost Options', 'dx_loc' ); ?></h2>
@@ -185,6 +196,17 @@ class DX_Localhost {
 							<td>
 								<div><input type="checkbox" id="notice-checkbox" name="dx-localhost-settings[notice-checkbox]" value="1"<?php checked('1', $notice_checkbox_val);?> />
 								<label for="notice-checkbox"><?php _e( 'Disable Notice Line', 'dx_loc' ); ?></label></div>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row"><?php _e( 'Notice Line Position', 'dx_loc'); ?></th>
+							<td>
+								<div>
+									<select class="dx-localhost-settings-notice-position" id="dx-notice-position" name="dx-localhost-settings[notice-position]">
+										<option value="top" <?php echo $notice_position == 'top' ? 'selected' : ''; ?>>Top</option>
+										<option value="bottom" <?php echo $notice_position == 'bottom' ? 'selected' : ''; ?>>Bottom</option>
+									</select>
+								</div>
 							</td>
 						</tr>
 						<tr>
