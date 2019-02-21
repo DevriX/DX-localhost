@@ -10,7 +10,7 @@ jQuery( document ).ready( function( $ ) {
 		var con = confirm('are you sure to reset it to default');
 		if(con)
 		{
-			$('#dx-env-name-id').val('');
+			$('#dx-env-name-id').val('Localhost');
 			$('#notice-checkbox').prop('checked',false);
 			$('#toolbar-checkbox').prop('checked',false);
 			$('#toolbar-font-weight').prop('checked',false);
