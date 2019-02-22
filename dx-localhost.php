@@ -324,7 +324,7 @@ class DX_Localhost {
 		<?php endif; ?>
 
 		<?php if( !empty( $adminbar_text_color_val ) ) : ?>
-			#wpadminbar a,span {
+			#wpadminbar a, #wpadminbar a span {
 				<?= 'color: '. $adminbar_text_color_val .' !important;'; ?>
 			}
 			#wpadminbar .ab-icon::before {
