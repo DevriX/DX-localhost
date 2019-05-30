@@ -2,8 +2,8 @@
 Contributors: nofearinc, devrix, hofmannsven, metodiew
 Tags: plugin, localhost, development, production, notice, toolbar, staging
 Requires at least: 3.1
-Tested up to: 4.9
-Stable tag: 1.0
+Tested up to: 5.2
+Stable tag: 1.5
 License: GPLv2 or later
 
 Display a yellow notice box when you're working on localhost
@@ -32,9 +32,17 @@ Take a look our video review of DX localhost
 == Frequently Asked Questions ==
 
 1. How do you change the environment name? 
-*You can change it by entering your desired environment name in the Dev Environment Name input field, Save the changes and you're done! 
+*You can change it by entering your desired environment name in the Dev Environment Name input field, Save the changes and you're done!
+
+2. How can I move the notice line to the admin bar?
+*You can use the admin bar as a notice line by disabling the line from "Notice Line Visibility" option and then paint the admin bar your desired color from "Adminbar Color", save the changes and you should be done!
 
 == Changelog ==
+
+= 1.5 =
+* Added new option for changing notice line position to Bottom of the site
+* Fixed bug when disabling the notice line the option to change color of admin bar wasn't working
+
 = 1.4 =
 * Added new option for change the color of adminbar
 * Added new option for changing the color of the adminbar text

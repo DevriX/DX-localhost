@@ -19,9 +19,16 @@ Super helpful whenever you're cloning a production website with virtual hosts us
 ## Frequently Asked Questions
 
 1. How do you change the environment name? 
-*You can change it by entering your desired environment name in the Dev Environment Name input field, Save the changes and you're done! 
+*You can change it by entering your desired environment name in the Dev Environment Name input field, Save the changes and you're done!
+
+2. How can I move the notice line to the admin bar?
+*You can use the admin bar as a notice line by disabling the line from "Notice Line Visibility" option and then paint the admin bar your desired color from "Adminbar Color", save the changes and you should be done!
 
 ## Changelog
+
+#### 1.5
+* Added new option for changing notice line position to Bottom of the site
+* Fixed bug when disabling the notice line the option to change color of admin bar wasn't working
 
 #### 1.4
 * Added new option for change the color of adminbar
