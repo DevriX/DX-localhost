@@ -31,7 +31,7 @@ Take a look our video review of DX localhost
 
 == Frequently Asked Questions ==
 
-1. How do you change the environment name? 
+1. How do you change the environment name?
 *You can change it by entering your desired environment name in the Dev Environment Name input field, Save the changes and you're done!
 
 2. How can I move the notice line to the admin bar?
@@ -42,6 +42,7 @@ Take a look our video review of DX localhost
 = 1.5 =
 * Added new option for changing notice line position to Bottom of the site
 * Fixed bug when disabling the notice line the option to change color of admin bar wasn't working
+* Fixed lack of sanitizing of input fields
 
 = 1.4 =
 * Added new option for change the color of adminbar

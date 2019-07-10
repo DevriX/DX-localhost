@@ -422,6 +422,8 @@ class DX_Localhost {
 		
 		if ( empty ( $input['env-name'] ) ) {
 			$input['env-name'] = self::get_env_name();
+		} else {
+			$input['env-name'] = esc_html( $input['env-name'] );
 		}
 		
 		//check if ip address input field is empty or ip address entered by the user is not the ip address of the site.
