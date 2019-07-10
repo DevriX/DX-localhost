@@ -29,6 +29,7 @@ Super helpful whenever you're cloning a production website with virtual hosts us
 #### 1.5
 * Added new option for changing notice line position to Bottom of the site
 * Fixed bug when disabling the notice line the option to change color of admin bar wasn't working
+* Fixed lack of sanitizing of input fields
 
 #### 1.4
 * Added new option for change the color of adminbar
