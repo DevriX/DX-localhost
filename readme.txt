@@ -3,6 +3,7 @@ Contributors: nofearinc, devrix, hofmannsven, metodiew
 Tags: plugin, localhost, development, production, notice, toolbar, staging
 Requires at least: 3.1
 Tested up to: 5.2
+Requires PHP:5.6
 Stable tag: 1.5
 License: GPLv2 or later
 
@@ -36,6 +37,17 @@ Take a look our video review of DX localhost
 
 2. How can I move the notice line to the admin bar?
 *You can use the admin bar as a notice line by disabling the line from "Notice Line Visibility" option and then paint the admin bar your desired color from "Adminbar Color", save the changes and you should be done!
+
+**Stay up to date**
+
+*Become a fan on Facebook*
+[https://www.facebook.com/DevriXLtd](https://www.facebook.com/DevriXLtd "Facebook Devrix")
+
+*Follow us on Twitter*
+[https://twitter.com/wpdevrix](https://twitter.com/wpdevrix)
+
+== Upgrade Notice ==
+The plugin is ownership of DevriX. We are going to work on a few versions, adding some nice features in the near feature, stay tuned! :)
 
 == Changelog ==
 
