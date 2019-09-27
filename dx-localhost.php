@@ -96,7 +96,7 @@ class DX_Localhost {
 				$style .= 'bottom: 0px';
 			}
 			
-			$notice_msg = __( 'You are working on ' . self::get_env_name() , 'dx_loc' );
+			$notice_msg = __( 'You are working on ' . self::get_env_name() , 'dx-localhost' );
 			
 			echo '<div id="dx-localhost-notice" style = "'. $style . '">'. $notice_msg .'</div>';
 		}
@@ -106,7 +106,7 @@ class DX_Localhost {
 	 * Load plugin text domain
 	 */
 	function dx_localhost_load_textdomain() {
-		load_plugin_textdomain( 'dx_loc', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'dx-localhost', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 	/**
 	 * Check if the current server is localhost
@@ -130,7 +130,7 @@ class DX_Localhost {
 
 
 	function dx_localhost_menu() {
-		add_options_page('DX localhost Options', __( 'DX localhost', 'dx_loc' ), 'manage_options', 'dx_localhost_options', array( $this, 'dx_localhost_options_cb' ) );
+		add_options_page('DX localhost Options', __( 'DX localhost', 'dx-localhost' ), 'manage_options', 'dx_localhost_options', array( $this, 'dx_localhost_options_cb' ) );
 	}
 
 	function dx_localhost_admin_init() {
@@ -179,27 +179,27 @@ class DX_Localhost {
 		$notice_position = isset( $dx_localhost_settings['notice-position'] ) ? !empty( $dx_localhost_settings['notice-position'] ) ? $dx_localhost_settings['notice-position'] : "" : "";
 		?>
 		<div class="wrap">
-			<h2><?php _e( 'DX localhost Options', 'dx_loc' ); ?></h2>
+			<h2><?php _e( 'DX localhost Options', 'dx-localhost' ); ?></h2>
 		
 			<form action="options.php" method="post"> 
 				<?php settings_fields( 'dx-localhost-settings' ); ?>
 					<table class="form-table">
 						<tr>
-							<th scope="row"><?php _e( 'Toolbar Visibility', 'dx_loc' ); ?></th>
+							<th scope="row"><?php _e( 'Toolbar Visibility', 'dx-localhost' ); ?></th>
 							<td>
 								<div><input type="checkbox" id="toolbar-checkbox" name="dx-localhost-settings[toolbar-checkbox]" value="1" <?php checked('1', $toolbar_checkbox_val); ?> />
-								<label for="toolbar-checkbox"><?php _e( 'Disable Localhost Toolbar Button', 'dx_loc' ); ?></label></div>
+								<label for="toolbar-checkbox"><?php _e( 'Disable Localhost Toolbar Button', 'dx-localhost' ); ?></label></div>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"><?php _e( 'Notice Line Visibility', 'dx_loc' ); ?></th>
+							<th scope="row"><?php _e( 'Notice Line Visibility', 'dx-localhost' ); ?></th>
 							<td>
 								<div><input type="checkbox" id="notice-checkbox" name="dx-localhost-settings[notice-checkbox]" value="1"<?php checked('1', $notice_checkbox_val);?> />
-								<label for="notice-checkbox"><?php _e( 'Disable Notice Line', 'dx_loc' ); ?></label></div>
+								<label for="notice-checkbox"><?php _e( 'Disable Notice Line', 'dx-localhost' ); ?></label></div>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"><?php _e( 'Notice Line Position', 'dx_loc'); ?></th>
+							<th scope="row"><?php _e( 'Notice Line Position', 'dx-localhost'); ?></th>
 							<td>
 								<div>
 									<select class="dx-localhost-settings-notice-position" id="dx-notice-position" name="dx-localhost-settings[notice-position]">
@@ -210,44 +210,44 @@ class DX_Localhost {
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"><?php _e( 'Adminbar Color', 'dx_loc' ); ?></th>
+							<th scope="row"><?php _e( 'Adminbar Color', 'dx-localhost' ); ?></th>
 							<td><input type="text" id="adminbar-color" name="dx-localhost-settings[adminbar-color]" value="<?php echo $adminbar_color_val; ?>" class="adminbar-color-field"  /></td>
 						</tr>
 						<tr>
-							<th scope="row"><?php _e( 'Adminbar Text Color', 'dx_loc' ); ?></th>
+							<th scope="row"><?php _e( 'Adminbar Text Color', 'dx-localhost' ); ?></th>
 							<td><input type="text" id="adminbar-text-color" name="dx-localhost-settings[adminbar-text-color]" value="<?php echo $adminbar_text_color_val; ?>" class="adminbar-text-color-field"  /></td>
 						</tr>
 						<tr>
-							<th scope="row"><?php _e( 'Toolbar Button Color', 'dx_loc' ); ?></th>
+							<th scope="row"><?php _e( 'Toolbar Button Color', 'dx-localhost' ); ?></th>
 							<td><input type="text" id="toolbar-color" name="dx-localhost-settings[toolbar-color]" value="<?php echo $toolbar_color_val;?>" class="toolbar-color-field"  /></td>
 						</tr>
 						<tr>
-							<th scope="row"><?php _e( 'Toolbar Text Color', 'dx_loc' ); ?></th>
+							<th scope="row"><?php _e( 'Toolbar Text Color', 'dx-localhost' ); ?></th>
 							<td><input type="text" id="toolbar-text-color" name="dx-localhost-settings[toolbar-text-color]" value="<?php echo $toolbar_text_color_val;?>" class="toolbar-text-color-field"  /></td>
 						</tr>
 						<tr>
-							<th scope="row"><?php _e( 'Toolbar Font Weight', 'dx_loc' ); ?></th>
+							<th scope="row"><?php _e( 'Toolbar Font Weight', 'dx-localhost' ); ?></th>
 							<td>
 								<div><input type="checkbox" id="toolbar-font-weight" name="dx-localhost-settings[toolbar-font-weight]" value="1" <?php checked('1', $toolbar_font_weight_checkbox_val); ?> />
-								<label for="toolbar-font-weight"><?php _e( 'Bolded Toolbar Button Text', 'dx_loc' ); ?></label></div>
+								<label for="toolbar-font-weight"><?php _e( 'Bolded Toolbar Button Text', 'dx-localhost' ); ?></label></div>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"><?php _e( 'Notice Line Color', 'dx_loc' ); ?></th>
+							<th scope="row"><?php _e( 'Notice Line Color', 'dx-localhost' ); ?></th>
 							<td><input type="text" id="notice-color" name="dx-localhost-settings[notice-color]" value="<?php echo $notice_color_val;?>" class="notice-color-field"  /></td>
 						</tr>
 						<tr>
-							<th scope="row"><?php _e( 'Notice Line Text Color', 'dx_loc' ); ?></th>
+							<th scope="row"><?php _e( 'Notice Line Text Color', 'dx-localhost' ); ?></th>
 							<td><input type="text" id="notice-text-color" name="dx-localhost-settings[notice-text-color]" value="<?php echo $notice_text_color_val;?>" class="notice-text-color-field"  /></td>
 						</tr>
 						<tr>
-							<th scope="row"><?php _e( 'Dev Environment Name:', 'dx_loc' ); ?></th>
+							<th scope="row"><?php _e( 'Dev Environment Name:', 'dx-localhost' ); ?></th>
 							<td>
 							   <div><input class="dx-localhost-settings-env-name" type="text" id="dx-env-name-id" name="dx-localhost-settings[env-name]" value="<?php echo $dx_env_name ?>" /></div>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"><?php _e( 'Dev Site IP Address:', 'dx_loc' ); ?></th>
+							<th scope="row"><?php _e( 'Dev Site IP Address:', 'dx-localhost' ); ?></th>
 							<td>
 								<div><input class="dx-localhost-settings-ip-addr" type="text" id="dx-ip-addr-id" name="dx-localhost-settings[ip-addr]" value="<?php echo $_SERVER['SERVER_ADDR'] ?>" /></div>
 							</td>
@@ -259,7 +259,7 @@ class DX_Localhost {
 							</td>
 						</tr>
 					</table>				
-				<div><?php submit_button( __( 'Save Changes', 'dx_loc', 'primary', 'dx-localhost' ) );?></div>
+				<div><?php submit_button( __( 'Save Changes', 'dx-localhost', 'primary', 'dx-localhost' ) );?></div>
 			</form>
 		</div>
 		<?php
@@ -370,7 +370,7 @@ class DX_Localhost {
 		
 		//working on localhost and environment name is not yet specified
 		if ( ( $_SERVER['SERVER_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_ADDR'] == '::1' ) && $dx_env_name == '' ) {
-			$dx_env_name = __( 'Localhost', 'dx_loc' );
+			$dx_env_name = __( 'Localhost', 'dx-localhost' );
 		}
 		
 		//working on staging domain and environment name is not yet specified
