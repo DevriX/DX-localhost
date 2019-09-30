@@ -55,6 +55,19 @@ class DX_Localhost {
 		add_action( 'wp_enqueue_scripts', array( $this, 'dx_localhost_display_notice_line' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'dx_enqueue_color_picker' ) );
 	}
+
+	/**
+	 * Helper function that checks if option is empty
+	 */
+	
+	public function dx_is_setting_empty( $setting_name, $return_value = '' ) {
+		$dx_localhost_settings = get_option( 'dx-localhost-settings' );
+		if( ! empty( $dx_localhost_settings[ $setting_name ] ) ) {
+			return $dx_localhost_settings[ $setting_name ];
+		} else {
+			return $return_value;
+		}
+	}
 	 
 	/**
 	 * Verify login activities and load script if on localhost
@@ -69,10 +82,10 @@ class DX_Localhost {
 			
 			
 			$style = '';
-			$notice_color_val = isset( $dx_localhost_settings['notice-color'] ) ? !empty($dx_localhost_settings['notice-color'])? $dx_localhost_settings['notice-color']:"": "";
-			$notice_text_color_val  = isset( $dx_localhost_settings['notice-text-color'] ) ? !empty($dx_localhost_settings['notice-text-color'])? $dx_localhost_settings['notice-text-color']:"": "";
+			$notice_color_val = $this->dx_is_setting_empty( 'notice-color' );
+			$notice_text_color_val  = $this->dx_is_setting_empty( 'notice-text-color' );
 
-			$notice_position = isset( $dx_localhost_settings['notice-position'] ) ? !empty( $dx_localhost_settings['notice-position'] ) ? $dx_localhost_settings['notice-position'] : 'top' : 'top';
+			$notice_position = $this->dx_is_setting_empty( 'notice-position', 'top' );
 			$is_logged_in = is_user_logged_in();
 			
 			if ( ! empty( $notice_color_val ) ) {
@@ -112,11 +125,9 @@ class DX_Localhost {
 	 * Check if the current server is localhost
 	 */
 	function dx_is_localhost() {
-		$dx_localhost = get_option( 'dx-localhost-settings' );
-		$dx_localhost_settings = !empty( $dx_localhost ) && is_array( $dx_localhost ) ? $dx_localhost : "";
-		
-		$dx_env_name = isset( $dx_localhost_settings['env-name'] ) ? !empty($dx_localhost_settings['env-name'])? $dx_localhost_settings['env-name']:"": "";
-		$dx_ip_addr  = isset( $dx_localhost_settings['ip-addr'] ) ? !empty($dx_localhost_settings['ip-addr'])? $dx_localhost_settings['ip-addr']:"": "";
+
+		$dx_env_name = $this->dx_is_setting_empty( 'env-name' );
+		$dx_ip_addr  = $this->dx_is_setting_empty( 'ip-addr' );
 		
 		$dx_localhost_name = apply_filters( 'dx_localhost_name', array( 'localhost', $dx_env_name ) );
 		$dx_localhost_addr = apply_filters( 'dx_localhost_addr', array( '127.0.0.1', $dx_ip_addr ) );
@@ -162,21 +173,19 @@ class DX_Localhost {
 	}
 
 	function dx_localhost_options_cb() {
-		$dx_localhost = get_option( 'dx-localhost-settings' );		
-		$dx_localhost_settings = !empty( $dx_localhost ) && is_array( $dx_localhost ) ? $dx_localhost : "";
-		
-		$toolbar_checkbox_val   = isset( $dx_localhost_settings['toolbar-checkbox'] ) ? !empty($dx_localhost_settings['toolbar-checkbox'])? $dx_localhost_settings['toolbar-checkbox']:"": "";
-		$toolbar_font_weight_checkbox_val   = isset( $dx_localhost_settings['toolbar-font-weight'] ) ? !empty($dx_localhost_settings['toolbar-font-weight'])? $dx_localhost_settings['toolbar-font-weight']:"": "";
-		$notice_checkbox_val    = isset( $dx_localhost_settings['notice-checkbox'] ) ? !empty($dx_localhost_settings['notice-checkbox'])? $dx_localhost_settings['notice-checkbox']:"": "";
-		$toolbar_color_val      = isset( $dx_localhost_settings['toolbar-color'] ) ? !empty($dx_localhost_settings['toolbar-color'])? $dx_localhost_settings['toolbar-color']:"": "";
-		$adminbar_color_val      = isset( $dx_localhost_settings['adminbar-color'] ) ? !empty($dx_localhost_settings['adminbar-color'])? $dx_localhost_settings['adminbar-color']:"": "";
-		$adminbar_text_color_val      = isset( $dx_localhost_settings['adminbar-text-color'] ) ? !empty($dx_localhost_settings['adminbar-text-color'])? $dx_localhost_settings['adminbar-text-color']:"": "";
-		$notice_color_val       = isset( $dx_localhost_settings['notice-color'] ) ? !empty($dx_localhost_settings['notice-color'])? $dx_localhost_settings['notice-color']:"": "";
-		$toolbar_text_color_val = isset( $dx_localhost_settings['toolbar-text-color'] ) ? !empty($dx_localhost_settings['toolbar-text-color'])? $dx_localhost_settings['toolbar-text-color']:"": "";
-		$notice_text_color_val  = isset( $dx_localhost_settings['notice-text-color'] ) ? !empty($dx_localhost_settings['notice-text-color'])? $dx_localhost_settings['notice-text-color']:"": "";
-		$dx_env_name            = isset( $dx_localhost_settings['env-name'] ) ? !empty($dx_localhost_settings['env-name'])? $dx_localhost_settings['env-name']:"": "";
-		$dx_ip_addr = isset( $dx_localhost_settings['ip-addr'] ) ? !empty($dx_localhost_settings['ip-addr'])? $dx_localhost_settings['ip-addr']:"": "";
-		$notice_position = isset( $dx_localhost_settings['notice-position'] ) ? !empty( $dx_localhost_settings['notice-position'] ) ? $dx_localhost_settings['notice-position'] : "" : "";
+
+		$toolbar_checkbox_val   = $this->dx_is_setting_empty( 'toolbar-checkbox' );
+		$toolbar_font_weight_checkbox_val = $this->dx_is_setting_empty( 'toolbar-font-weight' );
+		$notice_checkbox_val    = $this->dx_is_setting_empty( 'notice-checkbox' );
+		$toolbar_color_val      = $this->dx_is_setting_empty( 'toolbar-color' );
+		$adminbar_color_val      = $this->dx_is_setting_empty( 'adminbar-color' );
+		$adminbar_text_color_val  = $this->dx_is_setting_empty( 'adminbar-text-color' );
+		$notice_color_val       = $this->dx_is_setting_empty( 'notice-color' );
+		$toolbar_text_color_val = $this->dx_is_setting_empty( 'toolbar-text-color' );
+		$notice_text_color_val  = $this->dx_is_setting_empty( 'notice-text-color' );
+		$dx_env_name            =  $this->dx_is_setting_empty( 'env-name' );
+		$dx_ip_addr =  $this->dx_is_setting_empty( 'ip-addr' );
+		$notice_position = $this->dx_is_setting_empty( 'notice-position', 'top' );
 		?>
 		<div class="wrap">
 			<h2><?php _e( 'DX localhost Options', 'dx-localhost' ); ?></h2>
@@ -269,8 +278,8 @@ class DX_Localhost {
 		$dx_localhost = get_option( 'dx-localhost-settings' );
 		$dx_localhost_settings = !empty( $dx_localhost ) && is_array( $dx_localhost ) ? $dx_localhost : "";
 		
-		$toolbar_checkbox_val = isset( $dx_localhost_settings['toolbar-checkbox'] ) ? !empty($dx_localhost_settings['toolbar-checkbox'])? $dx_localhost_settings['toolbar-checkbox']:"": "";
-		$notice_line_checkbox_val = isset( $dx_localhost_settings['notice-checkbox'] ) ? !empty($dx_localhost_settings['notice-checkbox'])? $dx_localhost_settings['notice-checkbox']:"": "";
+		$toolbar_checkbox_val   = self::dx_is_setting_empty( 'toolbar-checkbox' );
+		$notice_checkbox_val    = self::dx_is_setting_empty( 'notice-checkbox' );
 		
 		
 		//if toolbar is not disabled display the style
