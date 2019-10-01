@@ -6,7 +6,7 @@
  * Version: 1.5
  * Author: DevriX
  * Author URI: http://devrix.com/
- * Text Domain: dx_localhost
+ * Text Domain: dx-localhost
  * Domain Path: /languages
  * GitHub Plugin URI: https://github.com/mpeshev/DX-localhost
  * License: GPL2
