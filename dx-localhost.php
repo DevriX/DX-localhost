@@ -58,14 +58,16 @@ class DX_Localhost {
 
 	/**
 	 * Helper function that checks if option is empty
+	 * @param $setting_name - The name of the setting to be called
+	 * @param $default_value - The value to return if there is the setting is empty. Defaults to empty string
 	 */
 	
-	public function dx_is_setting_empty( $setting_name, $return_value = '' ) {
+	public function dx_is_setting_empty( $setting_name, $default_value = '' ) {
 		$dx_localhost_settings = get_option( 'dx-localhost-settings' );
 		if( ! empty( $dx_localhost_settings[ $setting_name ] ) ) {
 			return $dx_localhost_settings[ $setting_name ];
 		} else {
-			return $return_value;
+			return $default_value;
 		}
 	}
 	 
