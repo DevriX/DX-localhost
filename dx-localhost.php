@@ -166,7 +166,8 @@ class DX_Localhost {
 				'notice-checkbox' => 0,
 				'adminbar-color' => "#23282D",
 				'adminbar-text-color' => "#eeeeee",
-				'notice-position'	=>	'top'
+				'notice-position'	=>	'top',
+				'notice-opacity' => '0.6',
 			);
 			
 			add_option("dx-localhost-settings",$default_settings);
@@ -188,6 +189,7 @@ class DX_Localhost {
 		$dx_env_name            =  $this->dx_is_setting_empty( 'env-name' );
 		$dx_ip_addr =  $this->dx_is_setting_empty( 'ip-addr' );
 		$notice_position = $this->dx_is_setting_empty( 'notice-position', 'top' );
+		$notice_opacity = $this->dx_is_setting_empty( 'notice-opacity', '0.6' );
 		?>
 		<div class="wrap">
 			<h2><?php _e( 'DX localhost Options', 'dx-localhost' ); ?></h2>
@@ -264,6 +266,12 @@ class DX_Localhost {
 							</td>
 						</tr>
 						<tr>
+							<th scope="row"><?php _e( 'Notice Line Opacity', 'dx-localhost' ); ?></th>
+							<td>
+								<div><input class="dx-localhost-settings-notice-opacity" type="number" id="notice-opacity"  min="1" max="100" name="dx-localhost-settings[notice-opacity]" value="<?php echo $notice_opacity; ?>" /></div>
+							</td>
+						</tr>
+						<tr>
 							<th scope="row"></th>
 							<td>
 								<div><button class="button" id="dx-localhost-settings-reset" type="button" onclick="resetToDefault()" >Reset to Default</button></div>
@@ -325,8 +333,18 @@ class DX_Localhost {
 		$adminbar_color_val = isset( $dx_localhost_settings['adminbar-color'] ) ? !empty($dx_localhost_settings['adminbar-color'])? $dx_localhost_settings['adminbar-color']:"": "";
 
 		$adminbar_text_color_val = isset( $dx_localhost_settings['adminbar-text-color'] ) ? !empty($dx_localhost_settings['adminbar-text-color'])? $dx_localhost_settings['adminbar-text-color']:"": "";
+
+		$notice_opacity = isset( $dx_localhost_settings['notice-opacity'] ) ? !empty($dx_localhost_settings['notice-opacity'])? $dx_localhost_settings['notice-opacity']:"": "";
+
+		$notice_opacity_percent = $notice_opacity / 100;
 		?>
 		<style type="text/css">
+
+		<?php if( ! empty( $notice_opacity_percent ) ) { ?>
+			#dx-localhost-notice {
+				<?= 'opacity: '. $notice_opacity_percent .';'; ?>
+			}
+		<?php } ?>
 
 		<?php if( !empty( $adminbar_color_val ) ) : ?>
 			#wpadminbar {
@@ -437,6 +455,11 @@ class DX_Localhost {
 			$input['env-name'] = esc_html( $input['env-name'] );
 		}
 		
+		if( ! isset( $input['notice-opacity'] ) ) {
+			$input['notice-opacity'] = esc_html( $input['notice-opacity'] );
+		} else {
+			$imput['notice_opacity'] = 0.6;
+		}
 		//check if ip address input field is empty or ip address entered by the user is not the ip address of the site.
 		if ( empty ( $input['ip-addr'] ) || $input['ip-addr'] != $_SERVER['SERVER_ADDR'] ) {
 			$input['ip-addr'] = $_SERVER['SERVER_ADDR'];
