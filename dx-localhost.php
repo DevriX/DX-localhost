@@ -334,7 +334,7 @@ class DX_Localhost {
 
 		$adminbar_text_color_val = isset( $dx_localhost_settings['adminbar-text-color'] ) ? !empty($dx_localhost_settings['adminbar-text-color'])? $dx_localhost_settings['adminbar-text-color']:"": "";
 
-		$notice_opacity = isset( $dx_localhost_settings['notice-opacity'] ) ? !empty($dx_localhost_settings['notice-opacity'])? $dx_localhost_settings['notice-opacity']:"": "";
+		$notice_opacity = dx_is_setting_empty( 'notice-opacity', '' );
 
 		$notice_opacity_percent = $notice_opacity / 100;
 		?>
@@ -342,13 +342,13 @@ class DX_Localhost {
 
 		<?php if( ! empty( $notice_opacity_percent ) ) { ?>
 			#dx-localhost-notice {
-				<?= 'opacity: '. $notice_opacity_percent .';'; ?>
+				<?php 'opacity: '. $notice_opacity_percent .';'; ?>
 			}
 		<?php } ?>
 
 		<?php if( !empty( $adminbar_color_val ) ) : ?>
 			#wpadminbar {
-				<?= 'background-color: '. $adminbar_color_val .';'; ?>
+				<? 'background-color: '. $adminbar_color_val .';'; ?>
 			}
 		<?php endif; ?>
 
