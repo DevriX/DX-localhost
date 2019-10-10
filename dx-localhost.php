@@ -348,7 +348,7 @@ class DX_Localhost {
 
 		<?php if( !empty( $adminbar_color_val ) ) : ?>
 			#wpadminbar {
-				<? 'background-color: '. $adminbar_color_val .';'; ?>
+				<?php 'background-color: '. $adminbar_color_val .';'; ?>
 			}
 		<?php endif; ?>
 
