@@ -329,7 +329,7 @@ class DX_Localhost {
 	}
 
 	public static function dx_admin_bar_style( $dx_localhost_settings ) {
-
+		//We can't call dx_is_setting_empty() as we are in static method
 		$adminbar_color_val = isset( $dx_localhost_settings['adminbar-color'] ) ? !empty($dx_localhost_settings['adminbar-color'])? $dx_localhost_settings['adminbar-color']:"": "";
 
 		$adminbar_text_color_val = isset( $dx_localhost_settings['adminbar-text-color'] ) ? !empty($dx_localhost_settings['adminbar-text-color'])? $dx_localhost_settings['adminbar-text-color']:"": "";
