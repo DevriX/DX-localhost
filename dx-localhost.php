@@ -59,7 +59,7 @@ class DX_Localhost {
 	 * @param $dx_setting_name - The name of the setting to be called
 	 * @param $dx_default_value - The value to return if there is the setting is empty. Defaults to empty string
 	 */
-	public function dx_is_setting_empty( $dx_setting_name, $dx_default_value = '' ) {
+	public static function dx_is_setting_empty( $dx_setting_name, $dx_default_value = '' ) {
 		$dx_localhost_settings = get_option( 'dx-localhost-settings' );
 		if( ! empty( $dx_localhost_settings[ $dx_setting_name ] ) ) {
 			return $dx_localhost_settings[ $dx_setting_name ];
@@ -106,7 +106,7 @@ class DX_Localhost {
 				$dx_style .= 'bottom: 0px';
 			}
 
-			$dx_notice_msg = __( 'You are working on ' . self::get_env_name() , 'dx-localhost' );
+			$dx_notice_msg = sprintf( __( 'You are working on %s' , 'dx-localhost' ), self::get_env_name() );
 
 			echo '<div id="dx-localhost-notice" style = "'. $dx_style . '">'. $dx_notice_msg .'</div>';
 		}
@@ -289,11 +289,9 @@ class DX_Localhost {
 
 	public static function dx_toolbar_button_style ( $dx_localhost_settings ) {
 
-		$dx_toolbar_color_val = isset( $dx_localhost_settings[ 'toolbar-color' ] ) ? !empty($dx_localhost_settings[ 'toolbar-color' ])? $dx_localhost_settings[ 'toolbar-color' ]:"": "";
-		$dx_toolbar_text_color_val = isset( $dx_localhost_settings[ 'toolbar-text-color' ] ) ? !empty($dx_localhost_settings[ 'toolbar-text-color' ])? $dx_localhost_settings[ 'toolbar-text-color' ]:"": "";
-
-		$dx_toolbar_font_weight_checkbox_val = isset( $dx_localhost_settings[ 'toolbar-font-weight' ] ) ? !empty($dx_localhost_settings[ 'toolbar-font-weight' ])? $dx_localhost_settings[ 'toolbar-font-weight' ]:"": "";
-
+		$dx_toolbar_color_val = self::dx_is_setting_empty( 'toolbar-color', '' );
+		$dx_toolbar_text_color_val = self::dx_is_setting_empty( 'toolbar-text-color', '' );
+		$dx_toolbar_font_weight_checkbox_val = self::dx_is_setting_empty( 'toolbar-font-weight', '' );
 		$dx_style = "";
 
 		if( !empty( $dx_toolbar_font_weight_checkbox_val ) || $dx_toolbar_font_weight_checkbox_val == "1" ) {
@@ -313,9 +311,8 @@ class DX_Localhost {
 
 	public static function dx_admin_bar_style( $dx_localhost_settings ) {
 
-		$dx_adminbar_color_val = isset( $dx_localhost_settings[ 'adminbar-color' ] ) ? !empty($dx_localhost_settings[ 'adminbar-color' ])? $dx_localhost_settings[ 'adminbar-color' ]:"": "";
-
-		$dx_adminbar_text_color_val = isset( $dx_localhost_settings[ 'adminbar-text-color' ] ) ? !empty($dx_localhost_settings[ 'adminbar-text-color' ])? $dx_localhost_settings[ 'adminbar-text-color' ]:"": "";
+		$dx_adminbar_color_val = self::dx_is_setting_empty( 'adminbar-color', '' );
+		$dx_adminbar_text_color_val = self::dx_is_setting_empty( 'adminbar-text-color', '' );
 		?>
 		<style type="text/css">
 
@@ -344,9 +341,9 @@ class DX_Localhost {
 	public static function dx_notice_line_style( $dx_localhost_settings ) {
 
 		$dx_localhost_settings = ! empty( $dx_localhost ) && is_array( $dx_localhost ) ? $dx_localhost : "";
+		$dx_notice_color_val = self::dx_is_setting_empty( 'notice-color', '' );
+		$dx_notice_text_color_val = self::dx_is_setting_empty( 'notice-text-color', '' );
 
-		$dx_notice_color_val = isset( $dx_localhost_settings[ 'notice-color' ] ) ? ! empty( $dx_localhost_settings[ 'notice-color' ])? $dx_localhost_settings[ 'notice-color' ]:"": "";
-		$dx_notice_text_color_val = isset( $dx_localhost_settings[ 'notice-text-color' ] ) ? ! empty( $dx_localhost_settings[ 'notice-text-color' ])? $dx_localhost_settings[ 'notice-text-color' ]:"": "";
 		?>
 		<style type="text/css">
 		<?php if( ! empty( $dx_notice_color_val ) ) : ?>
@@ -368,6 +365,7 @@ class DX_Localhost {
 		$dx_localhost_settings = !empty( $dx_localhost ) && is_array( $dx_localhost ) ? $dx_localhost : "";
 
 		$dx_env_name = isset( $dx_localhost_settings[ 'env-name' ] ) ? !empty($dx_localhost_settings[ 'env-name' ])? $dx_localhost_settings[ 'env-name' ]:"": "";
+		$dx_env_name = self::dx_is_setting_empty( 'env-name', '' );
 
 		//working on localhost and environment name is not yet specified
 		if ( ( $_SERVER[ 'SERVER_ADDR' ] == '127.0.0.1' || $_SERVER[ 'SERVER_ADDR' ] == '::1' ) && $dx_env_name == '' ) {
