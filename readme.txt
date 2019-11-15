@@ -17,9 +17,6 @@ Activate the plugin and see a yellow notice bar indicating that you're working o
 
 Super helpful whenever you're cloning a production website with virtual hosts using the same domain name, and are not sure which site are you editing. Visible both in the admin area, and the frontend to all site visitors.
 
-Take a look our video review of DX localhost
-[youtube https://www.youtube.com/watch?v=b-L8TL529JM]
-
 == Screenshots ==
 
 1. Sample notification line
