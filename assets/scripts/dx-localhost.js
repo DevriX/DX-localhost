@@ -5,4 +5,5 @@ jQuery( document ).ready( function( $ ) {
 	if ( $('#wpadminbar').length && parseInt( noticeline.disable_notice, 10) == 0 ) {
 		$('#dx-localhost-notice').css('top', '32px');
 	}
+
 });
